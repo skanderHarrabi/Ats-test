@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Tag, Space } from 'antd';
+import { Link } from 'react-router-dom';
 import axiosInstance from "../../config/axios-instance";
 import './Home.scss';
 
@@ -42,7 +43,7 @@ const Home = (props) => {
             title: 'reviews',
             key: 'reviews',
             dataIndex: 'reviews',
-            render: imageUrl => <button onClick={(_id) => handlClickprod(_id)}>Show Reviews</button>,
+            render: (imageUrl, record) => <Link to={`/product/${record._id}`}>View Product</Link>,
         }
     ];
 
@@ -62,7 +63,7 @@ const Home = (props) => {
             <button onClick={handlClick}>Load Data</button>
             {prods && <Table pagination={{ pageSize: 20 }} columns={columns} dataSource={prods} onRow={(record, rowIndex) => {
                 return {
-                    onClick: event => { console.log(event.target) }, // click row
+                    onClick: event => { console.log(event.target) },
                 };
             }} />}
         </div>

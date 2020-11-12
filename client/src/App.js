@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { connect, Provider } from "react-redux";
 import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 import HomePage from "./pages/home-page/Home";
-import { logout } from "./actions/auth-actions/actions";
+import Product from "./pages/home-page/single_product_page/Product";
 import store from "./stores/store-dev";
 import './App.scss';
 
@@ -22,40 +22,12 @@ const App = props => {
       <div className={"app"}>
         <Switch location={props.history.location}>
           <Route exact path={"/"} component={HomePage} />
+          <Route exact path={"/product/:id"} component={Product} />
         </Switch>
       </div>
     </Provider>
   );
 };
-// function AuthRoute({ component: Component, authenticated, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       exact
-//       render={props =>
-//         authenticated ? (
-//           <Component {...props} />
-//         ) : (
-//             <Redirect
-//               to={{ pathname: "/signin", state: { from: props.location } }}
-//             />
-//           )
-//       }
-//     />
-//   );
-// }
-
-// function GuestRoute({ component: Component, authenticated, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       exact
-//       render={props =>
-//         !authenticated ? <Component {...props} /> : <Redirect to="/" />
-//       }
-//     />
-//   );
-// }
 
 const mapStateToProps = reduxStore => {
   return {
@@ -68,6 +40,5 @@ const mapStateToProps = reduxStore => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { logout }
   )(App)
 );
